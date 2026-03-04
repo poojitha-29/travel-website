@@ -138,7 +138,7 @@ const FOUNDER_REELS = [
 
 const Home = () => {
   const [featured, setFeatured] = useState([]);
-  const [status, setStatus] = useState('Checking backend…');
+  const [status, setStatus] = useState('Checking…');
   const [activeSlide, setActiveSlide] = useState(0);
   const [reviews, setReviews] = useState([]);
   const [activeReview, setActiveReview] = useState(0);
@@ -156,7 +156,7 @@ const Home = () => {
 
     getHealth()
       .then(() => setStatus('Your Trusted Travel Partner'))
-      .catch(() => setStatus('Offline: API not reachable'));
+      .catch(() => setStatus('Loading...'));
 
     getFeaturedPackages()
       .then((res) => setFeatured(res.data || []))

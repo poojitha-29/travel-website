@@ -105,7 +105,7 @@ const Packages = () => {
 
       {state === 'error' && (
         <p style={{ color: '#b91c1c' }}>
-          We couldn’t load packages. Check backend and Supabase tables.
+          Loading...
         </p>
       )}
 
