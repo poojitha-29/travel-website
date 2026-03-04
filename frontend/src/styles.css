@@ -242,11 +242,26 @@ a {
   color: #f9fafb;
 }
 
-@media (max-width: 768px) {
-  .hero-overlay-inner {
-    max-width: 100%;
-    padding: 16px;
+@media (max-width:768px){
+
+  .hero-overlay-inner{
+    margin-left:0;
+    padding:20px;
+    max-width:100%;
   }
+
+  .hero{
+    height:60vh;
+  }
+
+  .hero-title{
+    font-size:24px;
+  }
+
+  .hero-subtitle{
+    font-size:14px;
+  }
+
 }
 .hero-kicker {
   font-size: 0.8rem;
@@ -933,7 +948,26 @@ a {
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
 }
+@media (max-width:768px){
 
+  .why-grid{
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+
+  .why-card{
+    padding:22px 16px;
+  }
+
+  .why-icon{
+    font-size:28px;
+  }
+
+  .why-label{
+    font-size:14px;
+  }
+
+}
 /* CARD */
 .why-card {
   background: white;
