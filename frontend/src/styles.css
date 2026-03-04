@@ -194,30 +194,40 @@ a {
 
 /* Hero with full-width slider */
 .hero {
+  margin-top: 0;
+}
+
+.hero-slider-section {
   position: relative;
-  width: 100%;
-  height: 70vh;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  min-height: 50vh;
+  max-height: 600px;
   overflow: hidden;
+  box-shadow: var(--shadow-strong);
 }
 
 .hero-slider {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
 }
 
 .hero-slide {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity 1s ease;
+  transform: scale(1.05);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .hero-slide-active {
   opacity: 1;
+  transform: scale(1);
 }
 
 .hero-overlay {
@@ -1837,18 +1847,4 @@ html, body {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
-}
-footer {
-  width: 100%;
-  padding: 24px 16px;
-}
-.reviews-section {
-  text-align: center;
-  max-width: 700px;
-  margin: auto;
-}
-
-.reviews-section p {
-  font-size: 15px;
-  line-height: 1.6;
 }
