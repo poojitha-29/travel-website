@@ -1885,49 +1885,44 @@ html,body{
   
   }
 
-  /* MOBILE FIX FOR WHY + REVIEWS */
+
+  /* FIX WHY SECTION MOBILE WIDTH */
+
 @media (max-width:768px){
 
-  /* WHY SECTION */
+  .app-main{
+  padding-left:0;
+  padding-right:0;
+  }
+  
   .why-section{
-  padding:50px 16px;
+  width:100%;
+  max-width:100%;
+  padding:60px 16px;
   }
   
   .why-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr !important;
-  gap:12px !important;
-  max-width:100% !important;
-  }
-  
-  .why-card{
-  padding:16px !important;
-  border-radius:14px;
-  }
-  
-  .why-icon{
-  font-size:26px;
-  }
-  
-  .why-label{
-  font-size:14px;
-  text-align:center;
-  }
-  
-  /* REVIEWS SECTION */
-  .reviews-layout{
-  display:flex !important;
-  flex-direction:column !important;
-  gap:20px;
-  }
-  
-  .review-form-card{
-  position:static;
-  margin-top:20px;
-  }
-  
-  .reviews-section{
-  padding:40px 16px;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  width:100%;
   }
   
   }
+  @media (max-width:768px){
+
+    .reviews-layout{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    }
+    
+    .review-form-card{
+    position:static;
+    width:100%;
+    }
+    
+    .review-card{
+    width:100%;
+    }
+    
+    }
