@@ -2502,3 +2502,92 @@ img {
 iframe{
   max-width:100%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================= */
+/* GLOBAL MOBILE OVERFLOW FIX    */
+/* ============================= */
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+/* ============================= */
+/* HERO FIX (FULL WIDTH MOBILE)  */
+/* ============================= */
+
+@media (max-width:768px){
+
+  .hero{
+    width:100%;
+    margin:0;
+    border-radius:0;
+  }
+
+  .hero-overlay-inner{
+    margin-left:0;
+    padding:24px;
+  }
+
+}
+
+
+/* ============================= */
+/* REELS SECTION FIX             */
+/* ============================= */
+
+.reels-row{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  max-width:100%;
+  padding-bottom:10px;
+}
+
+.reels-row iframe{
+  flex:0 0 260px;
+  width:260px;
+  max-width:260px;
+}
+
+
+/* ============================= */
+/* WHY GRID MOBILE FIX           */
+/* ============================= */
+
+@media (max-width:768px){
+
+  .why-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+
+  .why-card{
+    padding:22px 14px;
+  }
+
+}
+
+
+/* ============================= */
+/* SAFETY FIX FOR IFRAME WIDTH   */
+/* ============================= */
+
+iframe{
+  max-width:100%;
+}
