@@ -854,15 +854,21 @@ a {
 }
 
 /* Mobile responsive */
-@media (max-width: 768px) {
-  .reviews-layout {
-    grid-template-columns: 1fr;
-  }
+@media (max-width:768px){
 
-  .review-form-card {
-    position: static;
+  .reviews-section{
+  padding:40px 16px;
   }
-}
+  
+  .review-form-card{
+  margin-top:20px;
+  }
+  
+  .review-card{
+  padding:18px;
+  }
+  
+  }
 .category-hero {
   background: linear-gradient(135deg, #064e3b, #065f46);
   padding: 60px 20px;
@@ -993,24 +999,32 @@ a {
 /* ============================= */
 /* RESPONSIVE                    */
 
-@media (max-width: 600px) {
-  .why-section {
-    padding: 70px 16px;
-  }
+@media (max-width:768px){
 
-  .why-title {
-    font-size: 26px;
+  .why-section{
+  padding:60px 16px;
   }
-
   
-  .why-card {
-    padding: 30px 20px;
+  .why-grid{
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  max-width:100%;
   }
-
-  .why-icon {
-    font-size: 36px;
+  
+  .why-card{
+  padding:20px 14px;
+  border-radius:14px;
   }
-}
+  
+  .why-icon{
+  font-size:26px;
+  }
+  
+  .why-label{
+  font-size:14px;
+  }
+  
+  }
 
 .laurel {
   font-size: 64px;
