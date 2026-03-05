@@ -236,8 +236,10 @@ a {
 
 
 .hero-overlay-inner{
-  max-width:650px;
-  margin-left:120px;
+  max-width:1200px;
+  margin:0 auto;
+  padding-left:20px;
+  padding-right:20px;
 }
 
 @media (max-width:768px){
@@ -1825,9 +1827,9 @@ footer {
 
 .hero-slider-section{
   width:100%;
-  max-width:100%;
-  margin:0;
-  padding:0;
+  max-width:none;
+  margin-left:0;
+  margin-right:0;
   }
 
   .hero-slider-section{
