@@ -49,11 +49,12 @@ a {
   margin: 0 auto;
   padding: 1.5rem 1.25rem 3rem;
 }
-
 .section {
-  margin: 2.25rem 0;
+  width:100%;
+  max-width:1120px;
+  margin:2.5rem auto;
+  padding:0 20px;
 }
-
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -94,9 +95,6 @@ a {
     grid-template-columns: 1fr;
   }
 }
-
-
-
 .card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
@@ -193,9 +191,10 @@ a {
 }
 
 /* Hero with full-width slider */
-.hero {
+.hero{
   position: relative;
   width: 100%;
+  min-height: 520px;
   height: 70vh;
   overflow: hidden;
 }
@@ -208,6 +207,7 @@ a {
 
 .hero-slide {
   position: absolute;
+  inset:0;
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -236,22 +236,25 @@ a {
 }
 
 
-.hero-overlay-inner {
-  max-width: 650px;
-  margin-left: 120px;
-  color: #f9fafb;
+.hero-overlay-inner{
+  max-width:650px;
+  margin-left:120px;
 }
 
 @media (max-width:768px){
 
-  .hero-overlay-inner{
-    margin:0;
-    padding:20px;
-    width:100%;
-  }
+.hero-overlay-inner{
+  margin:0;
+  padding:20px;
+  width:100%;
+}
 
+}
+
+@media (max-width:768px){
   .hero{
-    height:60vh;
+    min-height:420px;
+    height:60vh;  
   }
 
   .hero-title{
@@ -343,14 +346,6 @@ a {
 /* Founder reels strip */
 .reels-section {
   margin-top: 2.5rem;
-}
-
-.reels-row {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  scroll-snap-type: x mandatory;
 }
 
 .reel-card {
@@ -949,12 +944,11 @@ a {
   gap: 30px;
 }
 @media (max-width:768px){
-
-  .why-grid{
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-  }
-
+    .why-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    }
+    
   .why-card{
     padding:22px 16px;
   }
@@ -997,13 +991,6 @@ a {
 
 /* ============================= */
 /* RESPONSIVE                    */
-/* ============================= */
-
-@media (max-width: 1024px) {
-  .why-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
 @media (max-width: 600px) {
   .why-section {
@@ -1014,11 +1001,7 @@ a {
     font-size: 26px;
   }
 
-  .why-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
+  
   .why-card {
     padding: 30px 20px;
   }
@@ -1348,12 +1331,7 @@ a {
   color: #1e293b;
 }
 
-/* ========================= */
-/* BLACK SEO FOOTER STRONGER */
-/* ========================= */
-/* ========================= */
-/* WHITE KEYWORD SECTION     */
-/* ========================= */
+
 
 .about-keywords {
   background: #ffffff;
@@ -1733,36 +1711,14 @@ a {
     grid-template-columns: 1fr;
   }
 
-  /* reels row */
-  .reels-row {
-    overflow-x: auto;
-    display: flex;
-    gap: 12px;
-    padding-bottom: 10px;
-  }
+ 
 
   .reel-card {
     min-width: 220px;
   }
-
-  /* why section */
-  .why-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  /* contact layout */
-  .contact-layout {
-    flex-direction: column;
-    gap: 20px;
-  }
-
 }
 
-.section {
-  max-width: 1200px;
-  margin: auto;
-}
+
 img {
   max-width: 100%;
   height: auto;
@@ -1779,12 +1735,6 @@ img {
 }
 /* HERO MOBILE FIX */
 @media (max-width: 768px) {
-
-  .hero-overlay-inner{
-    margin:0;
-    padding:20px;
-    width:100%;
-  }
 
   .hero-title {
     font-size: 24px;
@@ -1808,18 +1758,19 @@ img {
   gap: 16px;
   overflow-x: auto;
   padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
 }
 
-.reels-row iframe {
-  min-width: 260px;
-  max-width: 260px;
+.reels-row iframe{
+  min-width:260px;
+  max-width:260px;
+  border-radius:12px;
+  scroll-snap-align:start;
+
 }
 
-@media (max-width: 768px) {
-  .reels-row {
-    padding-left: 16px;
-  }
-}
+
 /* CATEGORY MOBILE FIX */
 
 @media (max-width: 768px) {
@@ -1854,25 +1805,7 @@ body {
   overflow-x: hidden;
 }
 
-.section {
-  max-width: 1120px;
-  margin: auto;
-  padding: 48px 20px;
-}
-@media (max-width: 768px) {
-  .section {
-    padding: 32px 16px;
-  }
-}
-html, body {
-  overflow-x: hidden;
-}
-@media (max-width: 768px) {
-  .why-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-}
+
 footer {
   width: 100%;
   padding: 24px 16px;
@@ -1887,726 +1820,20 @@ footer {
   font-size: 15px;
   line-height: 1.6;
 }
-
-
-/* ================================= */
-/* HOMEPAGE STABILITY FIX (SAFE)     */
-/* ================================= */
-
-/* prevent horizontal overflow */
-html, body {
-  overflow-x: hidden;
-}
-
-/* HERO FIX */
-.hero {
-  width: 100%;
-  height: 65vh;
-  min-height: 420px;
-  position: relative;
-}
-
-.hero-overlay {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.hero-overlay-inner {
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
-}
-
-/* mobile hero */
-@media (max-width:768px){
-
-  .hero{
-    height:60vh;
-    min-height:380px;
+html,body{
+  overflow-x:hidden;
   }
-
-  .hero-title{
-    font-size:24px;
-  }
-
-  .hero-subtitle{
-    font-size:14px;
-  }
-
-  .hero-actions{
-    flex-direction:column;
-    gap:10px;
-  }
-
-}
-
-/* REELS FIX */
-.reels-row{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  padding-bottom:10px;
-}
-
-.reel-card{
-  min-width:240px;
-  flex-shrink:0;
-}
-
-/* WHY SECTION MOBILE */
-@media (max-width:768px){
-
-  .why-grid{
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-  }
-
-}
-
-/* REVIEWS FIX */
-.reviews-section{
-  max-width:700px;
-  margin:auto;
-  text-align:center;
-}
-
-/* FOOTER WIDTH FIX */
-.footer-inner{
-  max-width:1120px;
-  margin:auto;
-}
-
-/* SECTION SAFE WIDTH */
-.section{
-  width:100%;
-  max-width:1120px;
-  margin:auto;
-  padding:40px 20px;
-}
-
-@media (max-width:768px){
-
-  .hero{
-    height:60vh;
-  }
-
-  .hero-overlay-inner{
-    margin:0;
-    padding:20px;
-    width:100%;
-  }
-
-  .hero-title{
-    font-size:26px;
-  }
-
-}
-/* ================================= */
-/* GLOBAL RESPONSIVE STABILITY PATCH */
-/* ================================= */
-
-/* Prevent sideways scrolling */
-html, body {
-  overflow-x: hidden;
-  width: 100%;
-}
-
-/* Section safe container */
-.section {
-  width: 100%;
-  max-width: 1120px;
-  margin: auto;
-  padding: 48px 20px;
-}
-
-/* Images always responsive */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ================================= */
-/* HERO SECTION FIX                  */
-/* ================================= */
-
-/* ================================= */
-/* GLOBAL RESPONSIVE STABILITY PATCH */
-/* ================================= */
-
-/* Prevent sideways scrolling */
-html, body {
-  overflow-x: hidden;
-  width: 100%;
-}
-
-/* Section safe container */
-.section {
-  width: 100%;
-  max-width: 1120px;
-  margin: auto;
-  padding: 48px 20px;
-}
-
-/* Images always responsive */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ================================= */
-/* HERO SECTION FIX                  */
-/* ================================= */
-
-.hero {
-  width: 100%;
-  height: 65vh;
-  min-height: 420px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-overlay {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.hero-overlay-inner{
-  margin:0;
-  padding:20px;
-  width:100%;
-}
-
-/* MOBILE HERO */
-@media (max-width:768px){
-
-  .hero{
-    height:60vh;
-    min-height:380px;
-  }
-
-  .hero-overlay-inner{
-    margin:0;
-    padding:20px;
-    width:100%;
-  }
-
-  .hero-title{
-    font-size:26px;
-    line-height:1.3;
-  }
-
-  .hero-subtitle{
-    font-size:14px;
-  }
-
-  .hero-actions{
-    flex-direction:column;
-    gap:10px;
-  }
-
-}
-
-/* ================================= */
-/* REELS SECTION FIX                 */
-/* ================================= */
-
-.reels-row{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  padding-bottom:10px;
-}
-
-.reel-card{
-  min-width:240px;
-  flex-shrink:0;
-}
-
-/* ================================= */
-/* CATEGORY SECTION FIX              */
-/* ================================= */
-
-@media (max-width:768px){
-
-  .category-grid{
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-  }
-
-}
-
-/* ================================= */
-/* WHY CHOOSE SECTION FIX            */
-/* ================================= */
-
-.why-grid{
-  max-width:1100px;
-  margin:auto;
-}
-
-@media (max-width:768px){
-
-  .why-grid{
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-  }
-
-  .why-card{
-    padding:22px 16px;
-  }
-
-  .why-icon{
-    font-size:28px;
-  }
-
-  .why-label{
-    font-size:14px;
-  }
-
-}
-
-/* ================================= */
-/* REVIEWS SECTION FIX               */
-/* ================================= */
-
-.reviews-section{
-  max-width:720px;
-  margin:auto;
-  text-align:center;
-}
-
-.reviews-section p{
-  font-size:15px;
-  line-height:1.6;
-}
-
-/* ================================= */
-/* FOOTER WIDTH FIX                  */
-/* ================================= */
-
-.footer{
-  width:100%;
-}
-
-.footer-inner{
-  max-width:1120px;
-  margin:auto;
-  padding:0 16px;
-}
-
-/* ================================= */
-/* BUTTON MOBILE FIX                 */
-/* ================================= */
-
-@media (max-width:768px){
-
-  .btn{
-    width:100%;
-    justify-content:center;
-  }
-
-}
-
-/* ================================= */
-/* REELS SECTION FIX                 */
-/* ================================= */
-
-.reels-row{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  padding-bottom:10px;
-}
-
-.reel-card{
-  min-width:240px;
-  flex-shrink:0;
-}
-
-/* ================================= */
-/* CATEGORY SECTION FIX              */
-/* ================================= */
-
-@media (max-width:768px){
-
-  .category-grid{
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-  }
-
-}
-
-/* ================================= */
-/* WHY CHOOSE SECTION FIX            */
-/* ================================= */
-
-.why-grid{
-  max-width:1100px;
-  margin:auto;
-}
-
-/* ================================= */
-/* GLOBAL RESPONSIVE STABILITY PATCH */
-/* ================================= */
-
-/* Prevent sideways scrolling */
-html, body {
-  overflow-x: hidden;
-  width: 100%;
-}
-
-/* Section safe container */
-.section {
-  width: 100%;
-  max-width: 1120px;
-  margin: auto;
-  padding: 48px 20px;
-}
-
-/* Images always responsive */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ================================= */
-/* HERO SECTION FIX                  */
-/* ================================= */
-
-.hero {
-  width: 100%;
-  height: 65vh;
-  min-height: 420px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-overlay {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-
-
-/* MOBILE HERO */
-@media (max-width:768px){
-
-  .hero{
-    height:60vh;
-    min-height:380px;
-  }
-
-  .hero-overlay-inner{
-    margin-left:0;
-    padding:20px;
-    text-align:left;
-  }
-
-  .hero-title{
-    font-size:26px;
-    line-height:1.3;
-  }
-
-  .hero-subtitle{
-    font-size:14px;
-  }
-
-  .hero-actions{
-    flex-direction:column;
-    gap:10px;
-  }
-
-}
-
-/* ================================= */
-/* REELS SECTION FIX                 */
-/* ================================= */
-
-.reels-row{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  padding-bottom:10px;
-}
-
-.reel-card{
-  min-width:240px;
-  flex-shrink:0;
-}
-
-/* ================================= */
-/* CATEGORY SECTION FIX              */
-/* ================================= */
-
-@media (max-width:768px){
-
-  .category-grid{
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-  }
-
-}
-
-/* ================================= */
-/* WHY CHOOSE SECTION FIX            */
-/* ================================= */
-
-.why-grid{
-  max-width:1100px;
-  margin:auto;
-}
-
-@media (max-width:768px){
-
-  .why-grid{
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-  }
-
-  .why-card{
-    padding:22px 16px;
-  }
-
-  .why-icon{
-    font-size:28px;
-  }
-
-  .why-label{
-    font-size:14px;
-  }
-
-}
-
-/* ================================= */
-/* REVIEWS SECTION FIX               */
-/* ================================= */
-
-.reviews-section{
-  max-width:720px;
-  margin:auto;
-  text-align:center;
-}
-
-.reviews-section p{
-  font-size:15px;
-  line-height:1.6;
-}
-
-/* ================================= */
-/* FOOTER WIDTH FIX                  */
-/* ================================= */
-
-.footer{
-  width:100%;
-}
-
-.footer-inner{
-  max-width:1120px;
-  margin:auto;
-  padding:0 16px;
-}
-
-/* ================================= */
-/* BUTTON MOBILE FIX                 */
-/* ================================= */
-
-@media (max-width:768px){
-
-  .btn{
-    width:100%;
-    justify-content:center;
-  }
-
-}
-
-/* ================================= */
-/* REVIEWS SECTION FIX               */
-/* ================================= */
-
-.reviews-section{
-  max-width:720px;
-  margin:auto;
-  text-align:center;
-}
-
-.reviews-section p{
-  font-size:15px;
-  line-height:1.6;
-}
-
-/* ================================= */
-/* FOOTER WIDTH FIX                  */
-/* ================================= */
-
-.footer{
-  width:100%;
-}
-
-.footer-inner{
-  max-width:1120px;
-  margin:auto;
-  padding:0 16px;
-}
-
-/* ================================= */
-/* BUTTON MOBILE FIX                 */
-/* ================================= */
-
-@media (max-width:768px){
-
-  .btn{
-    width:100%;
-    justify-content:center;
-  }
-
-}
-/* ================================= */
-/* REELS OVERFLOW FIX                */
-/* ================================= */
-
-.reels-row{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  overflow-y:hidden;
+  
+  img{
   max-width:100%;
-}
-
-.reels-row iframe{
-  flex:0 0 260px;
-  width:260px;
-  max-width:260px;
-}
-
-/* Prevent page stretching */
-.section{
-  max-width:1120px;
-  margin:auto;
-}
-
-/* HERO FULL WIDTH */
-.hero{
-  position:relative;
-  width:100%;
-  height:65vh;
-  min-height:420px;
-  overflow:hidden;
-}
-
-/* prevent iframe from breaking layout */
-iframe{
+  height:auto;
+  }
+  
+  iframe{
   max-width:100%;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ============================= */
-/* GLOBAL MOBILE OVERFLOW FIX    */
-/* ============================= */
-
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-
-/* ============================= */
-/* HERO FIX (FULL WIDTH MOBILE)  */
-/* ============================= */
-
-@media (max-width:768px){
-
-  .hero{
-    width:100%;
-    margin:0;
-    border-radius:0;
   }
+  *{
+    max-width:100%;
+    }
+    
 
-  .hero-overlay-inner{
-    margin:0;
-    padding:20px;
-    width:100%;
-  }
-
-}
-
-
-/* ============================= */
-/* REELS SECTION FIX             */
-/* ============================= */
-
-.reels-row{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  overflow-y:hidden;
-  max-width:100%;
-  padding-bottom:10px;
-}
-
-.reels-row iframe{
-  width:260px;
-  min-width:260px;
-  flex-shrink:0;
-}
-
-
-/* ============================= */
-/* WHY GRID MOBILE FIX           */
-/* ============================= */
-
-@media (max-width:768px){
-
-  .why-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-  }
-
-  .why-card{
-    padding:22px 14px;
-  }
-
-}
-
-.why-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:30px;
-  max-width:1100px;
-  margin:auto;
-}
-
-@media (max-width:768px){
-  .why-grid{
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-  }
-}
-/* ============================= */
-/* SAFETY FIX FOR IFRAME WIDTH   */
-/* ============================= */
-
-iframe{
-  max-width:100%;
-}
-.reel-embed{
-  min-width:260px;
-  flex-shrink:0;
-}

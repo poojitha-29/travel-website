@@ -195,7 +195,6 @@ a {
   position: relative;
   width: 100%;
   min-height: 520px;
-  height: 70vh;
   overflow: hidden;
 }
 
@@ -1749,6 +1748,10 @@ img {
     flex-direction: column;
     gap: 10px;
   }
+  .hero-actions .btn{
+    width:100%;
+    text-align:center;
+  }
 
 }
 /* REELS MOBILE FIX */
@@ -1820,6 +1823,17 @@ footer {
   font-size: 15px;
   line-height: 1.6;
 }
+
+.hero-slider-section{
+  width:100%;
+  max-width:100%;
+  margin:0;
+  padding:0;
+  }
+
+
+
+
 html,body{
   overflow-x:hidden;
   }
