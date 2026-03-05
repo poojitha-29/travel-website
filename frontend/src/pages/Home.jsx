@@ -143,11 +143,7 @@ const Home = () => {
   const [reviews, setReviews] = useState([]);
   const [activeReview, setActiveReview] = useState(0);
 
-  useEffect(() => {
-    if (window.instgrm) {
-      window.instgrm.Embeds.process();
-    }
-  }, []);
+ 
 
   useEffect(() => {
     getReviews()
@@ -239,14 +235,25 @@ const Home = () => {
         </div>
         <div className="reels-row">
   {FOUNDER_REELS.map((reel) => (
-    <div key={reel.id} className="reel-embed">
-      <blockquote
-        className="instagram-media"
-        data-instgrm-permalink={reel.url}
-        data-instgrm-version="14"
-        style={{ background: '#fff', border: 0, margin: '1rem auto' }}
-      ></blockquote>
-    </div>
+    <a
+      key={reel.id}
+      href={reel.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="reel-card"
+    >
+      <div className="reel-thumb">
+        <img
+          src={`https://picsum.photos/seed/reel${reel.id}/400/700`}
+          alt="Travel Reel"
+        />
+        <div className="reel-play">▶</div>
+      </div>
+
+      {reel.headline && (
+        <div className="reel-caption">{reel.headline}</div>
+      )}
+    </a>
   ))}
 </div>
       </section>

@@ -2607,3 +2607,56 @@ html, body {
 iframe{
   max-width:100%;
 }
+
+/* REELS PREVIEW */
+
+.reels-row{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  padding-bottom:10px;
+  scroll-snap-type:x mandatory;
+  }
+  
+  .reel-card{
+  flex:0 0 auto;
+  width:240px;
+  text-decoration:none;
+  color:inherit;
+  }
+  
+  .reel-thumb{
+  position:relative;
+  border-radius:16px;
+  overflow:hidden;
+  }
+  
+  .reel-thumb img{
+  width:100%;
+  height:340px;
+  object-fit:cover;
+  display:block;
+  }
+  
+  .reel-play{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:38px;
+  background:rgba(0,0,0,0.6);
+  color:white;
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  }
+  
+  .reel-caption{
+  margin-top:8px;
+  font-size:14px;
+  font-weight:500;
+  line-height:1.4;
+  }
