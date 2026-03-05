@@ -53,7 +53,7 @@ a {
   width:100%;
   max-width:1120px;
   margin:2.5rem auto;
-  padding:20 20px;
+  padding:20px;
 }
 .section-header {
   display: flex;
@@ -1832,10 +1832,7 @@ footer {
   margin-right:0;
   }
 
-  .hero-slider-section{
-    width:100vw;
-    max-width:100vw;
-    }
+
 
 
 html,body{
@@ -1850,8 +1847,6 @@ html,body{
   iframe{
   max-width:100%;
   }
-  *{
-    max-width:100%;
-    }
+  
     
 
