@@ -2468,3 +2468,37 @@ img {
   }
 
 }
+/* ================================= */
+/* REELS OVERFLOW FIX                */
+/* ================================= */
+
+.reels-row{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  max-width:100%;
+}
+
+.reels-row iframe{
+  flex:0 0 260px;
+  width:260px;
+  max-width:260px;
+}
+
+/* Prevent page stretching */
+.section{
+  max-width:1120px;
+  margin:auto;
+}
+
+/* HERO FULL WIDTH */
+.hero{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+}
+
+/* prevent iframe from breaking layout */
+iframe{
+  max-width:100%;
+}
