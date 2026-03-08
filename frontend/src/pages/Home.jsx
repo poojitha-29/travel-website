@@ -48,7 +48,7 @@ const INSTAGRAM_URL12 = 'https://www.instagram.com/reel/DUGAUAEkhh6/';
 
 
 const WHY_POINTS = [
-  { label: '100% Customisation', icon: '🧳' },
+  { label: '100% Friendly', icon: '🧳' },
   { label: '24×7 Availability', icon: '💜' },
   { label: '95% Visa Success', icon: '👍' },
   { label: 'Happy Travellers', icon: '👨‍👩‍👧‍👦' }
@@ -58,39 +58,39 @@ const FOUNDER_REELS = [
   {
     id: 1,
     url: INSTAGRAM_URL1,
-    headline: '7 Days in Bali + Gili Island – Perfect island hopping plan'
+    headline: '5 Days in Kashmir , Perfect Summer plan',
+    thumbnail: 'https://unsplash.com/photos/pine-tree-near-snow-mountain-RQYqCxdFYpQ'
+
   },
   {
     id: 2,
-    url: INSTAGRAM_URL2
+    url: INSTAGRAM_URL2,
+    headline: 'Explore Bali+Gili Island 6N/7D',
+    thumbnail: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   },
   {
     id: 3,
-    title: 'Europe in 10 nights',
-    highlight: 'Picking 3 cities that actually fit',
-    tripType: 'Friends',
-    url: INSTAGRAM_URL3
+    url: INSTAGRAM_URL3,
+    headline: 'Vietnam-Timeless CHarm ',
+    thumbnail: 'https://images.unsplash.com/photo-1545172538-171a802bd867?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   },
   {
     id: 4,
-    title: 'Maldives on a budget',
-    highlight: 'Resort vs local island explained simply',
-    tripType: 'Couples',
-    url: INSTAGRAM_URL4
+    url: INSTAGRAM_URL4,
+    headline: 'Unforgettable Himachal 6N/7D',
+    thumbnail: 'https://images.unsplash.com/photo-1597754865557-96ea6b53c9db?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   },
   {
     id: 5,
-    title: 'Dubai long weekend',
-    highlight: 'Balancing malls, desert and old Dubai',
-    tripType: 'Family',
-    url: INSTAGRAM_URL5
+    url: INSTAGRAM_URL5,
+     headline: 'Phuket and Krabi-Once is never enough',
+    thumbnail: 'https://images.unsplash.com/photo-1494949360228-4e9bde560065?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   },
   {
     id: 6,
-    title: 'Kashmir in winter',
-    highlight: 'What first‑timers don’t expect about snow',
-    tripType: 'Family',
-    url: INSTAGRAM_URL6
+    url: INSTAGRAM_URL6,
+    headline: 'Kedarnath - where nature meets devotion',
+    thumbnail: 'https://images.unsplash.com/photo-1712733900711-d0b929d0d7cc?q=80&w=677&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   },
   {
     id: 7,
@@ -244,7 +244,7 @@ const Home = () => {
     >
       <div className="reel-thumb">
         <img
-          src={`https://picsum.photos/seed/reel${reel.id}/400/700`}
+          src={reel.thumbnail}
           alt="Travel Reel"
         />
         <div className="reel-play">▶</div>
