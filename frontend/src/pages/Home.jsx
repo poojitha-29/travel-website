@@ -59,7 +59,7 @@ const FOUNDER_REELS = [
     id: 1,
     url: INSTAGRAM_URL1,
     headline: '5 Days in Kashmir , Perfect Summer plan',
-    thumbnail: 'https://unsplash.com/photos/pine-tree-near-snow-mountain-RQYqCxdFYpQ'
+    thumbnail: 'https://images.unsplash.com/photo-1552098933-a5ceb0e5dd91?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 
   },
   {
@@ -94,45 +94,23 @@ const FOUNDER_REELS = [
   },
   {
     id: 7,
-    title: 'Kerala backwaters slow trip',
-    highlight: 'How many nights on a houseboat is enough',
-    tripType: 'Relaxed',
-    url: INSTAGRAM_URL7
+    url: INSTAGRAM_URL7,
+    headline: 'Vibrant-Gujarat',
+    thumbnail: 'https://images.unsplash.com/photo-1642841819300-20ed449c02a1?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   },
   {
     id: 8,
-    title: 'Singapore with kids',
-    highlight: 'Theme parks without exhausting everyone',
-    tripType: 'Family',
-    url: INSTAGRAM_URL8
-  },
-  {
-    id: 9,
-    title: 'Vietnam highlights',
-    highlight: 'North vs south route selection tips',
-    tripType: 'Backpack‑light',
-    url: INSTAGRAM_URL9
+    url: INSTAGRAM_URL8,
+    headline: 'Singapore -Live the glam life',
+    thumbnail:'https://images.unsplash.com/photo-1580541631950-7282082b53ce?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+
   },
   {
     id: 10,
-    title: 'Sri Lanka circuit',
-    highlight: 'Beach, hills and culture in one loop',
-    tripType: 'Couples',
-    url: INSTAGRAM_URL10
-  },
-  {
-    id: 11,
-    title: 'Andaman island hopping',
-    highlight: 'Best beaches for snorkelling and sunsets',
-    tripType: 'Beach',
-    url: INSTAGRAM_URL11
-  },
-  {
-    id: 12,
-    title: 'Turkey in 8 days',
-    highlight: 'Istanbul, Cappadocia and one coast stop',
-    tripType: 'Friends',
-    url: INSTAGRAM_URL12
+    url: INSTAGRAM_URL10,
+    headline: 'Andaman - Blue and You',
+    thumbnail:'https://images.unsplash.com/photo-1582812403989-69ef5dde0dfc?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+
   }
 ];
 
