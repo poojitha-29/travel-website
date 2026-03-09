@@ -69,7 +69,7 @@ const Navbar = () => {
             Reviews
           </NavLink>
           <NavLink to="/videos" className={navLinkClass} onClick={() => setOpen(false)}>
-            Videos
+            About Us
           </NavLink>
           <NavLink to="/faq" className={navLinkClass} onClick={() => setOpen(false)}>
             FAQ
