@@ -5,60 +5,89 @@ const AdminLogin = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("LOGIN CLICKED");
     setError('');
-
+    setLoading(true);
     try {
       await adminLogin(username, password);
       localStorage.setItem('admin_logged_in', 'true');
       onLogin();
     } catch {
       setError('Invalid username or password');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <section className="section" style={{ maxWidth: 400, margin: '0 auto' }}>
-      <div className="card">
-        <h2 style={{ marginBottom: 20 }}>Admin Login</h2>
-
-        <form onSubmit={handleSubmit}>
-          <div className="form-row">
-            <label>Username</label>
-            <input
-              className="input"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+    <div className="admin-login-page">
+      <div className="admin-login-left">
+        <div className="admin-login-brand">
+          <div className="admin-login-logo">SH</div>
+          <div>
+            <div className="admin-login-brand-name">Sangeetha Holidays</div>
+            <div className="admin-login-brand-sub">Admin Dashboard</div>
           </div>
-
-          <div className="form-row">
-            <label>Password</label>
-            <input
-              type="password"
-              className="input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <button type="submit" className="btn" style={{ width: '100%' }}>
-            Login
-          </button>
-
-          {error && (
-            <p style={{ color: 'red', marginTop: 10 }}>
-              {error}
-            </p>
-          )}
-        </form>
+        </div>
+        <div className="admin-login-quote">
+          <p>"The world is a book, and those who do not travel read only one page."</p>
+          <span>— Saint Augustine</span>
+        </div>
       </div>
-    </section>
+
+      <div className="admin-login-right">
+        <div className="admin-login-card">
+          <div className="admin-login-header">
+            <div className="admin-login-icon">🔐</div>
+            <h2>Welcome back</h2>
+            <p>Sign in to manage your travel content</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="admin-login-form">
+            <div className="admin-field">
+              <label>Username</label>
+              <input
+                className="admin-input"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                placeholder="Enter your username"
+                required
+                autoComplete="username"
+              />
+            </div>
+            <div className="admin-field">
+              <label>Password</label>
+              <input
+                type="password"
+                className="admin-input"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+                autoComplete="current-password"
+              />
+            </div>
+
+            {error && (
+              <div className="admin-login-error">
+                <span>⚠️</span> {error}
+              </div>
+            )}
+
+            <button type="submit" className="admin-login-btn" disabled={loading}>
+              {loading ? 'Signing in…' : 'Sign In →'}
+            </button>
+          </form>
+
+          <p className="admin-login-footer">
+            Sangeetha Holidays · Secure Admin Area
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 
