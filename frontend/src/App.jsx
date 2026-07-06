@@ -12,6 +12,11 @@ import About from './pages/About.jsx';
 import FAQ from './pages/FAQ.jsx';
 import Contact from './pages/Contact.jsx';
 import Admin from './pages/Admin.jsx';
+import RefundPolicy from './pages/RefundPolicy.jsx';
+import TermsConditions from './pages/TermsConditions.jsx';
+
+...
+
 
 const App = () => {
   const { pathname } = useLocation();
@@ -38,6 +43,8 @@ const App = () => {
           <Route path="/videos" element={<About />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+<Route path="/terms-and-conditions" element={<TermsConditions />} />
         </Routes>
       </main>
       <Footer />
