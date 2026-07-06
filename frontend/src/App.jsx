@@ -15,9 +15,6 @@ import Admin from './pages/Admin.jsx';
 import RefundPolicy from './pages/RefundPolicy.jsx';
 import TermsConditions from './pages/TermsConditions.jsx';
 
-...
-
-
 const App = () => {
   const { pathname } = useLocation();
   const isAdmin = pathname === '/admin';
