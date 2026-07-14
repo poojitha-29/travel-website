@@ -56,6 +56,9 @@ const Navbar = () => {
             { to: '/videos', label: 'About Us' },
             { to: '/faq', label: 'FAQ' },
             { to: '/contact', label: 'Contact' },
+                  { to: '/refund-policy', label: 'Refund Policy' },
+            { to: '/terms-and-conditions', label: 'Terms&Conditions' },
+
           ].map(({ to, label, end }) => (
             <NavLink
               key={to}
