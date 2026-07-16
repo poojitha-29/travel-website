@@ -9,15 +9,15 @@ const supabase = createClient(
 function generateSecureHash(payload, secretKey) {
   const sortedKeys = Object.keys(payload)
     .filter(
-      (k) =>
-        payload[k] !== null &&
-        payload[k] !== undefined &&
-        payload[k] !== ""
+      (key) =>
+        payload[key] !== null &&
+        payload[key] !== undefined &&
+        payload[key] !== ""
     )
     .sort();
 
   const message = sortedKeys
-    .map((k) => String(payload[k]))
+    .map((key) => String(payload[key]))
     .join("");
 
   return crypto
@@ -43,6 +43,13 @@ function getTxnDate() {
 }
 
 export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      success: false,
+      error: "Method not allowed",
+    });
+  }
+
   try {
     const {
       customer_name,
@@ -54,15 +61,21 @@ export default async function handler(req, res) {
 
     const merchantTxnNo = `SH${Date.now()}`;
 
-    await supabase.from("payments").insert({
-      merchant_txn_no: merchantTxnNo,
-      customer_name,
-      mobile,
-      email,
-      amount,
-      remarks,
-      status: "PENDING",
-    });
+    const { error: insertError } = await supabase
+      .from("payments")
+      .insert({
+        merchant_txn_no: merchantTxnNo,
+        customer_name,
+        mobile,
+        email,
+        amount,
+        remarks,
+        status: "PENDING",
+      });
+
+    if (insertError) {
+      throw insertError;
+    }
 
     const payload = {
       addlParam1: remarks || "PAYMENT",
@@ -98,13 +111,27 @@ export default async function handler(req, res) {
     );
 
     const data = await iciciResponse.json();
+
     console.log("ICICI RESPONSE");
     console.log(JSON.stringify(data, null, 2));
+
+    if (data.responseCode !== "R1000") {
+      return res.status(400).json({
+        success: false,
+        error: "ICICI rejected request",
+        iciciResponse: data,
+      });
+    }
+
+    const paymentUrl =
+      `${data.redirectURI}?tranCtx=${encodeURIComponent(data.tranCtx)}`;
+
     return res.status(200).json({
       success: true,
-      payload,
-      iciciResponse: data,
+      merchantTxnNo,
+      paymentUrl,
     });
+
   } catch (err) {
     console.error(err);
 
