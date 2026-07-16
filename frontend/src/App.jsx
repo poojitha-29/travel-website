@@ -44,6 +44,10 @@ const App = () => {
           <Route path="/refund-policy" element={<RefundPolicy />} />
 <Route path="/terms-and-conditions" element={<TermsConditions />} />
           <Route path="/pay-now" element={<PayNow />} />
+          <Route
+  path="/payment-response"
+  element={<PaymentResponse />}
+/>
         </Routes>
       </main>
       <Footer />
