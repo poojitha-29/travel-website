@@ -25,6 +25,19 @@ const TABS = [
       </svg>
     )
   },
+  {
+  id: 'payments',
+  label: 'Payments',
+  table: 'payments',
+  desc: 'Customer Payments',
+  icon: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2">
+      <rect x="2" y="5" width="20" height="14" rx="2"/>
+      <line x1="2" y1="10" x2="22" y2="10"/>
+    </svg>
+  )
+},
   { id: 'videos',   label: 'Videos',   table: 'videos',         desc: 'Video content',
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -38,6 +51,7 @@ const EMPTY = {
   packages: { name:'', slug:'', destination:'', description:'', duration_days:7, price:1500, currency:'INR', is_featured:false, thumbnail_url:'', poster_url:'', category:'' },
   gallery:  { title:'', image_url:'', destination:'', package_id:'' },
   faqs:     { question:'', answer:'', category:'' },
+  payments: {},
   videos:   { title:'', video_url:'', thumbnail_url:'', duration_seconds:'' },
 };
 
@@ -135,7 +149,16 @@ function AdminFormFields({ activeTab, form, set, activeCats, toggleCat }) {
           <input className="adm-input" value={form.category} onChange={e => set('category', e.target.value)} placeholder="e.g. Visa, Booking, General" />
         </div>
       </>)}
-
+{activeTab === 'payments' && (
+  <>
+    <th>Txn No</th>
+    <th>Customer</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Mode</th>
+    <th>Date</th>
+  </>
+)}
       {activeTab === 'videos' && (<>
         <div className="adm-field">
           <label>Title <span className="adm-req">*</span></label>
@@ -396,6 +419,16 @@ const Admin = () => {
                     {activeTab === 'packages' && (<><th>Image</th><th>Package</th><th>Price</th><th>Status</th><th>Actions</th></>)}
                     {activeTab === 'gallery'  && (<><th>Image</th><th>Title</th><th>Destination</th><th>Pkg ID</th><th>Actions</th></>)}
                     {activeTab === 'faqs'     && (<><th colSpan={2}>Question</th><th colSpan={2}>Preview</th><th>Actions</th></>)}
+                    {activeTab === 'payments' && (
+  <>
+    <th>Txn No</th>
+    <th>Customer</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Mode</th>
+    <th>Date</th>
+  </>
+)}
                     {activeTab === 'videos'   && (<><th>Thumb</th><th>Title</th><th colSpan={2}>URL</th><th>Actions</th></>)}
                   </tr>
                 </thead>
@@ -474,7 +507,51 @@ const Admin = () => {
                         </button>
                       </td>
                     </tr>
-                  )) : rows.map(v => (
+                  ))  : activeTab === 'payments' ? rows.map(p => (
+  <tr key={p.id}>
+    <td>
+      <div className="adm-td-name">
+        {p.merchant_txn_no}
+      </div>
+    </td>
+
+    <td>
+      <div className="adm-td-name">
+        {p.customer_name}
+      </div>
+
+      <div className="adm-td-sub">
+        {p.mobile}
+      </div>
+    </td>
+
+    <td>
+      ₹ {p.amount}
+    </td>
+
+    <td>
+      <span className={`adm-pill ${
+        p.status === 'SUCCESS'
+          ? 'adm-pill-green'
+          : p.status === 'FAILED'
+          ? 'adm-pill-red'
+          : 'adm-pill-amber'
+      }`}>
+        {p.status}
+      </span>
+    </td>
+
+    <td>
+      {p.payment_mode || '-'}
+    </td>
+
+    <td>
+      {p.paid_at
+        ? new Date(p.paid_at).toLocaleString()
+        : '-'}
+    </td>
+  </tr>
+)) : rows.map(v => (
                     <tr key={v.id} className={`adm-tr${selectedId === v.id ? ' adm-tr-sel' : ''}`} onClick={() => onEdit(v)}>
                       <td>{v.thumbnail_url && <img src={v.thumbnail_url} alt="" className="adm-thumb" onError={e => { e.target.style.display='none'; }} />}</td>
                       <td>
