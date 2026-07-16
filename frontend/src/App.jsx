@@ -14,6 +14,7 @@ import Contact from './pages/Contact.jsx';
 import Admin from './pages/Admin.jsx';
 import RefundPolicy from './pages/RefundPolicy.jsx';
 import TermsConditions from './pages/TermsConditions.jsx';
+import PayNow from "./pages/PayNow";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
 <Route path="/terms-and-conditions" element={<TermsConditions />} />
+          <Route path="/pay-now" element={<PayNow />} />
         </Routes>
       </main>
       <Footer />
