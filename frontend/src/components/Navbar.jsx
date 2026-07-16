@@ -28,7 +28,9 @@ const Navbar = () => {
           <NavLink to="/contact" className={({ isActive }) =>
             `${isActive ? 'navbar-link-active' : 'navbar-link-muted'} navbar-cta-link`
           }>Contact</NavLink>
-          <NavLink to="/pay-now">Pay Now</NavLink>
+          <NavLink to="/pay-now" className={navLinkClass}>
+  Pay Now
+</NavLink>
                     <NavLink to="/refund-policy" className={navLinkClass}>Refund Policy</NavLink>
                               <NavLink to="/terms-and-conditions" className={navLinkClass}>Terms & Conditions </NavLink>
 
