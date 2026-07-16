@@ -28,6 +28,7 @@ const Navbar = () => {
           <NavLink to="/contact" className={({ isActive }) =>
             `${isActive ? 'navbar-link-active' : 'navbar-link-muted'} navbar-cta-link`
           }>Contact</NavLink>
+          <Link to="/pay-now">Pay Now</Link>
                     <NavLink to="/refund-policy" className={navLinkClass}>Refund Policy</NavLink>
                               <NavLink to="/terms-and-conditions" className={navLinkClass}>Terms & Conditions </NavLink>
 
@@ -56,6 +57,7 @@ const Navbar = () => {
             { to: '/videos', label: 'About Us' },
             { to: '/faq', label: 'FAQ' },
             { to: '/contact', label: 'Contact' },
+       { to: '/pay-now', label: 'Pay Now' },
                   { to: '/refund-policy', label: 'Refund Policy' },
             { to: '/terms-and-conditions', label: 'Terms&Conditions' },
 
