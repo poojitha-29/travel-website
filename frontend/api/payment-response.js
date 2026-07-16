@@ -33,7 +33,11 @@ export default async function handler(req, res) {
     const callback = req.body || {};
 
     console.log("========== ICICI CALLBACK ==========");
-    console.log(JSON.stringify(callback, null, 2));
+    console.log(
+  "Payment Callback:",
+  callback.merchantTxnNo,
+  callback.responseCode
+);
 
     const receivedHash = callback.secureHash || "";
 
