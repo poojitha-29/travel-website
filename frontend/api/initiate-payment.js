@@ -98,7 +98,8 @@ export default async function handler(req, res) {
     );
 
     const data = await iciciResponse.json();
-
+    console.log("ICICI RESPONSE");
+    console.log(JSON.stringify(data, null, 2));
     return res.status(200).json({
       success: true,
       payload,
