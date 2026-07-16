@@ -24,37 +24,40 @@ export default function PayNow() {
     try {
       setLoading(true);
 
-      const response = await fetch("/api/initiate-payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+      const response = await fetch(
+        "/api/initiate-payment",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Something went wrong");
+        throw new Error(
+          data.error || "Failed to initiate payment"
+        );
       }
 
-      alert(
-        `Payment record created successfully.\nTransaction No: ${data.merchantTxnNo}`
+      if (data.paymentUrl) {
+        window.location.href = data.paymentUrl;
+        return;
+      }
+
+      throw new Error(
+        "Payment URL not received from gateway"
       );
 
-      console.log(data);
-
-      setForm({
-        customer_name: "",
-        mobile: "",
-        email: "",
-        amount: "",
-        remarks: "",
-      });
     } catch (error) {
       console.error(error);
 
-      alert(error.message || "Failed to create payment record");
+      alert(
+        error.message || "Something went wrong"
+      );
     } finally {
       setLoading(false);
     }
@@ -69,6 +72,7 @@ export default function PayNow() {
       }}
     >
       <h1>Pay Now</h1>
+
       <p>
         Enter your details and payment amount to proceed.
       </p>
@@ -76,6 +80,7 @@ export default function PayNow() {
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: "16px" }}>
           <label>Full Name *</label>
+
           <input
             type="text"
             name="customer_name"
@@ -92,6 +97,7 @@ export default function PayNow() {
 
         <div style={{ marginBottom: "16px" }}>
           <label>Mobile Number *</label>
+
           <input
             type="tel"
             name="mobile"
@@ -108,6 +114,7 @@ export default function PayNow() {
 
         <div style={{ marginBottom: "16px" }}>
           <label>Email Address *</label>
+
           <input
             type="email"
             name="email"
@@ -124,6 +131,7 @@ export default function PayNow() {
 
         <div style={{ marginBottom: "16px" }}>
           <label>Amount (₹) *</label>
+
           <input
             type="number"
             min="1"
@@ -141,6 +149,7 @@ export default function PayNow() {
 
         <div style={{ marginBottom: "16px" }}>
           <label>Purpose / Remarks</label>
+
           <textarea
             name="remarks"
             value={form.remarks}
@@ -162,7 +171,9 @@ export default function PayNow() {
             cursor: "pointer",
           }}
         >
-          {loading ? "Processing..." : "Proceed To Payment"}
+          {loading
+            ? "Redirecting..."
+            : "Proceed To Payment"}
         </button>
       </form>
     </div>
