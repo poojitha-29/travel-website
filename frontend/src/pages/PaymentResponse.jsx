@@ -1,36 +1,63 @@
-import { useEffect, useState } from "react";
+import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 export default function PaymentResponse() {
-  const [url, setUrl] = useState("");
+  const [params] = useSearchParams();
 
-  useEffect(() => {
-    console.log("FULL URL");
-    console.log(window.location.href);
-
-    console.log("SEARCH");
-    console.log(window.location.search);
-
-    console.log("HASH");
-    console.log(window.location.hash);
-
-    setUrl(window.location.href);
-  }, []);
+  const status = params.get("status");
+  const txn = params.get("txn");
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h2>Payment Response Debug</h2>
+    <div
+      style={{
+        maxWidth: "700px",
+        margin: "60px auto",
+        textAlign: "center",
+        padding: "20px",
+      }}
+    >
+      {status === "success" && (
+        <>
+          <h1>✅ Payment Successful</h1>
 
-      <p>Open F12 Console and send screenshot.</p>
+          <p>
+            Thank you for your payment.
+          </p>
 
-      <textarea
-        value={url}
-        readOnly
-        rows={8}
-        style={{
-          width: "100%",
-          marginTop: "20px"
-        }}
-      />
+          <p>
+            Transaction Reference:
+            <br />
+            <strong>{txn}</strong>
+          </p>
+        </>
+      )}
+
+      {status === "failed" && (
+        <>
+          <h1>❌ Payment Failed</h1>
+
+          <p>
+            The payment was not successful.
+          </p>
+        </>
+      )}
+
+      {status === "error" && (
+        <>
+          <h1>⚠️ Processing Error</h1>
+
+          <p>
+            Please contact support.
+          </p>
+        </>
+      )}
+
+      {!status && (
+        <>
+          <h1>Payment Response</h1>
+          <p>No transaction details found.</p>
+        </>
+      )}
     </div>
   );
 }
