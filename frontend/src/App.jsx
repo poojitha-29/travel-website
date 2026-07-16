@@ -15,6 +15,7 @@ import Admin from './pages/Admin.jsx';
 import RefundPolicy from './pages/RefundPolicy.jsx';
 import TermsConditions from './pages/TermsConditions.jsx';
 import PayNow from "./pages/PayNow";
+import PaymentResponse from "./pages/PaymentResponse";
 
 const App = () => {
   const { pathname } = useLocation();
