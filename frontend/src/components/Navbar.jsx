@@ -25,12 +25,24 @@ const Navbar = () => {
           <NavLink to="/reviews" className={navLinkClass}>Reviews</NavLink>
           <NavLink to="/videos" className={navLinkClass}>About Us</NavLink>
           <NavLink to="/faq" className={navLinkClass}>FAQ</NavLink>
-          <NavLink to="/contact" className={({ isActive }) =>
-            `${isActive ? 'navbar-link-active' : 'navbar-link-muted'} navbar-cta-link`
-          }>Contact</NavLink>
-          <NavLink to="/pay-now" className={navLinkClass}>
+          <NavLink
+  to="/pay-now"
+  className={({ isActive }) =>
+    `${isActive ? 'navbar-link-active' : ''} navbar-paynow`
+  }
+>
   Pay Now
 </NavLink>
+
+<NavLink
+  to="/contact"
+  className={({ isActive }) =>
+    `${isActive ? 'navbar-link-active' : 'navbar-link-muted'} navbar-cta-link`
+  }
+>
+  Contact
+</NavLink>
+         
                     <NavLink to="/refund-policy" className={navLinkClass}>Refund Policy</NavLink>
                               <NavLink to="/terms-and-conditions" className={navLinkClass}>Terms & Conditions </NavLink>
 
@@ -58,8 +70,9 @@ const Navbar = () => {
             { to: '/reviews', label: 'Reviews' },
             { to: '/videos', label: 'About Us' },
             { to: '/faq', label: 'FAQ' },
-            { to: '/contact', label: 'Contact' },
        { to: '/pay-now', label: 'Pay Now' },
+            { to: '/contact', label: 'Contact' },
+      
                   { to: '/refund-policy', label: 'Refund Policy' },
             { to: '/terms-and-conditions', label: 'Terms&Conditions' },
 
