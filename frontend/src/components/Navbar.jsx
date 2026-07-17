@@ -31,7 +31,7 @@ const Navbar = () => {
     `${isActive ? 'navbar-link-active' : ''} navbar-paynow`
   }
 >
-  Pay Now
+ 🔒 Pay Now
 </NavLink>
 
 <NavLink
