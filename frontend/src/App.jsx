@@ -16,6 +16,7 @@ import RefundPolicy from './pages/RefundPolicy.jsx';
 import TermsConditions from './pages/TermsConditions.jsx';
 import PayNow from "./pages/PayNow";
 import PaymentResponse from "./pages/PaymentResponse";
+import Records from "./pages/Records";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -49,6 +50,7 @@ const App = () => {
   path="/payment-response"
   element={<PaymentResponse />}
 />
+          <Route path="/records" element={<Records />} />
         </Routes>
       </main>
       <Footer />
