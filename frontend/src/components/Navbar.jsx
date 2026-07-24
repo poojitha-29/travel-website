@@ -13,7 +13,7 @@ const Navbar = () => {
         <NavLink to="/" className="navbar-brand">
           <div className="navbar-logo-mark">SH</div>
           <div>
-            <div className="navbar-brand-name">Sangeetha Holidays</div>
+            <div className="navbar-brand-name">Sangeetha Holidays Private Limited</div>
             <div className="navbar-brand-tagline">Curated journeys, made simple</div>
           </div>
         </NavLink>
