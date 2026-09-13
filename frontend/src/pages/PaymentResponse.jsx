@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export default function PaymentResponse() {
@@ -6,6 +6,27 @@ export default function PaymentResponse() {
 
   const status = params.get("status");
   const txn = params.get("txn");
+
+  const [payment, setPayment] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!txn) {
+      setLoading(false);
+      return;
+    }
+
+    fetch(`/api/payment-status?txn=${encodeURIComponent(txn)}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPayment(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching payment:", error);
+        setLoading(false);
+      });
+  }, [txn]);
 
   return (
     <div
@@ -29,6 +50,38 @@ export default function PaymentResponse() {
             <br />
             <strong>{txn}</strong>
           </p>
+
+          {loading ? (
+            <p>Loading payment details...</p>
+          ) : payment ? (
+            <>
+              <p>
+                Amount Received:
+                <br />
+                <strong>₹{payment.amount}</strong>
+              </p>
+
+              {payment.paymentId && (
+                <p>
+                  Payment ID:
+                  <br />
+                  <strong>{payment.paymentId}</strong>
+                </p>
+              )}
+
+              {payment.paymentMode && (
+                <p>
+                  Payment Mode:
+                  <br />
+                  <strong>{payment.paymentMode}</strong>
+                </p>
+              )}
+            </>
+          ) : (
+            <p>
+              Payment details could not be loaded.
+            </p>
+          )}
         </>
       )}
 
@@ -39,6 +92,26 @@ export default function PaymentResponse() {
           <p>
             The payment was not successful.
           </p>
+
+          {loading ? (
+            <p>Loading payment details...</p>
+          ) : payment ? (
+            <>
+              <p>
+                Transaction Reference:
+                <br />
+                <strong>{txn}</strong>
+              </p>
+
+              {payment.amount && (
+                <p>
+                  Amount:
+                  <br />
+                  <strong>₹{payment.amount}</strong>
+                </p>
+              )}
+            </>
+          ) : null}
         </>
       )}
 
