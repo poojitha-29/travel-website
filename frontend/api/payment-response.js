@@ -54,6 +54,7 @@ export default async function handler(req, res) {
       callback.responseCode === "0000" &&
       hashValid;
 
+
     await supabase
       .from("payments")
       .update({
@@ -83,6 +84,120 @@ export default async function handler(req, res) {
         "merchant_txn_no",
         callback.merchantTxnNo
       );
+
+    
+        // =========================================================
+    // WATI - SEND PAYMENT SUCCESS MESSAGE
+    // =========================================================
+
+    if (isSuccess) {
+      try {
+        // Get customer details from Supabase
+        const { data: payment, error: paymentError } =
+          await supabase
+            .from("payments")
+            .select("customer_name, mobile")
+            .eq(
+              "merchant_txn_no",
+              callback.merchantTxnNo
+            )
+            .single();
+
+        if (paymentError) {
+          console.error(
+            "WATI: Could not fetch customer details:",
+            paymentError
+          );
+        } else if (payment) {
+
+          // Format mobile number for WhatsApp
+          let whatsappNumber = String(
+            payment.mobile || ""
+          ).replace(/\D/g, "");
+
+          if (whatsappNumber.length === 10) {
+            whatsappNumber = "91" + whatsappNumber;
+          }
+
+          if (!whatsappNumber) {
+            console.error(
+              "WATI: Customer mobile number not found"
+            );
+          } else {
+
+            const watiUrl =
+              `${process.env.WATI_API_ENDPOINT}/api/v1/sendTemplateMessage?whatsappNumber=${encodeURIComponent(
+                whatsappNumber
+              )}`;
+
+            const watiPayload = {
+              template_name:
+                process.env.WATI_TEMPLATE_NAME,
+
+              broadcast_name:
+                "payment_received",
+
+              parameters: [
+                {
+                  name: "1",
+                  value: String(
+                    payment.customer_name || ""
+                  )
+                },
+                {
+                  name: "2",
+                  value: String(
+                    callback.amount || ""
+                  )
+                },
+                {
+                  name: "3",
+                  value: String(
+                    callback.merchantTxnNo || ""
+                  )
+                }
+              ]
+            };
+
+            const watiResponse =
+              await fetch(watiUrl, {
+                method: "POST",
+
+                headers: {
+                  "Content-Type": "application/json",
+                  "Authorization":
+                    `Bearer ${process.env.WATI_API_TOKEN}`
+                },
+
+                body: JSON.stringify(watiPayload)
+              });
+
+            const watiResult =
+              await watiResponse.text();
+
+            console.log(
+              "========== WATI RESPONSE =========="
+            );
+
+            console.log(
+              "WATI STATUS:",
+              watiResponse.status
+            );
+
+            console.log(
+              "WATI RESULT:",
+              watiResult
+            );
+          }
+        }
+
+      } catch (watiError) {
+        console.error(
+          "WATI WhatsApp error:",
+          watiError
+        );
+      }
+    }
 
     return res.redirect(
       302,
