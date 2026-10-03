@@ -54,8 +54,7 @@ export default async function handler(req, res) {
       callback.responseCode === "0000" &&
       hashValid;
 
-   console.log("HASH VALID:", hashValid);
-   console.log("IS SUCCESS:", isSuccess);
+   
 
     await supabase
       .from("payments")
@@ -113,13 +112,35 @@ export default async function handler(req, res) {
         } else if (payment) {
 
           // Format mobile number for WhatsApp
-          let whatsappNumber = String(
-            payment.mobile || ""
-          ).replace(/\D/g, "");
+         let whatsappNumber = String(
+  payment.mobile || ""
+).replace(/\D/g, "");
 
-          if (whatsappNumber.length === 10) {
-            whatsappNumber = "91" + whatsappNumber;
-          }
+// Remove leading 0 if customer entered 0XXXXXXXXXX
+if (
+  whatsappNumber.length === 11 &&
+  whatsappNumber.startsWith("0")
+) {
+  whatsappNumber = whatsappNumber.substring(1);
+}
+
+// If 10-digit Indian number, add country code
+if (whatsappNumber.length === 10) {
+  whatsappNumber = "91" + whatsappNumber;
+}
+
+// If already starts with 91, keep it as it is
+if (
+  whatsappNumber.length === 12 &&
+  whatsappNumber.startsWith("91")
+) {
+  // Already in correct format
+}
+
+console.log(
+  "WATI FINAL WHATSAPP NUMBER:",
+  whatsappNumber
+);
 
           if (!whatsappNumber) {
             console.error(
