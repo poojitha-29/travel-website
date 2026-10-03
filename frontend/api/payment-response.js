@@ -54,6 +54,8 @@ export default async function handler(req, res) {
       callback.responseCode === "0000" &&
       hashValid;
 
+   console.log("HASH VALID:", hashValid);
+   console.log("IS SUCCESS:", isSuccess);
 
     await supabase
       .from("payments")
