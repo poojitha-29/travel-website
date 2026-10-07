@@ -18,7 +18,7 @@ const PackageDetail = () => {
 
   const handleWhatsApp = () => {
     const text = `*New Package Enquiry*\n\nPackage: ${pkg.name}\nArrival Date: ${form.arrivalDate}\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nCity: ${form.city}\nAdults: ${form.adults}\nChildren: ${form.children}\n\nMessage:\n${form.message}`;
-    window.open(`https://wa.me/918106868686?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/919849848495?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   if (!pkg) return <p className="loading-text">Loading package…</p>;
