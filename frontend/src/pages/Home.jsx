@@ -4,10 +4,10 @@ import { getFeaturedPackages, getHealth, getReviews } from '../services/api.js';
 import PackageCard from '../components/PackageCard.jsx';
 
 const HERO_IMAGES = [
-  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80',
-  'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1600&q=80',
-  'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80',
-  'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1600&q=80',
+  'https://images.unsplash.com/photo-1624049321569-f483adecb8fa?auto=format&fit=crop&w=1600&q=80',
+  'https://plus.unsplash.com/premium_photo-1711434824963-ca894373272e?auto=format&fit=crop&w=1600&q=80',
+  'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1600&q=80',
+  'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?auto=format&fit=crop&w=1600&q=80',
 ];
 
 const HERO_SERVICES = [
