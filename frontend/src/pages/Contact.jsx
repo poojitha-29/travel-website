@@ -8,7 +8,7 @@ const Contact = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const text = `New Travel Enquiry\n\nName: ${form.name}\nWhatsApp: ${form.phone}\nCity: ${form.place}`;
-    window.open(`https://wa.me/918106868686?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/919849848495?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
@@ -54,7 +54,7 @@ const Contact = () => {
               <i className="fab fa-whatsapp"></i>&nbsp; Send WhatsApp Enquiry
             </button>
             <a
-              href="tel:+918106868686"
+              href="tel:+919849848495"
               className="btn outline"
               style={{ width: '100%', marginTop: '0.75rem', padding: '0.9rem', textAlign: 'center', display: 'flex', justifyContent: 'center' }}
             >
@@ -92,7 +92,7 @@ const Contact = () => {
               <h3>Phone</h3>
               <p>
                 <a href="tel:+918106868686">+91 81068 68686</a><br />
-                <a href="tel:+918978903318">+91 89789 03318</a>
+                <a href="tel:+919849848495">+91 984984 8495</a>
               </p>
 
               <h3>Business Hours</h3>
