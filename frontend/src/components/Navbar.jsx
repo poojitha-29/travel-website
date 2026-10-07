@@ -42,14 +42,18 @@ const Navbar = () => {
 >
   Contact
 </NavLink>
-         
-<NavLink to="/refund-policy" className="navbar-legal-link">
-  Refund Policy
-</NavLink>
 
-<NavLink to="/terms-and-conditions" className="navbar-legal-link">
-  Terms & Conditions
-</NavLink>
+
+          
+<div className="navbar-legal-links">
+  <NavLink to="/refund-policy" className="navbar-legal-link">
+    Refund Policy
+  </NavLink>
+
+  <NavLink to="/terms-and-conditions" className="navbar-legal-link">
+    Terms & Conditions
+  </NavLink>
+</div>
 
 
           
