@@ -253,7 +253,7 @@ const Home = () => {
       </section>
 
       {/* WhatsApp Float */}
-      <a href="https://wa.me/918106868686" target="_blank" rel="noreferrer" className="whatsapp-float">
+      <a href="https://wa.me/919849848495" target="_blank" rel="noreferrer" className="whatsapp-float">
         <i className="fab fa-whatsapp"></i>
       </a>
     </div>
