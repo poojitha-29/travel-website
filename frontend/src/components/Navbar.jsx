@@ -43,8 +43,13 @@ const Navbar = () => {
   Contact
 </NavLink>
          
-                    <NavLink to="/refund-policy" className={navLinkClass}>Refund Policy</NavLink>
-                              <NavLink to="/terms-and-conditions" className={navLinkClass}>Terms & Conditions </NavLink>
+<NavLink to="/refund-policy" className="navbar-legal-link">
+  Refund Policy
+</NavLink>
+
+<NavLink to="/terms-and-conditions" className="navbar-legal-link">
+  Terms & Conditions
+</NavLink>
 
 
           
