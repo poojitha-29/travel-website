@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getPackages } from '../services/api.js';
 import PackageCard from '../components/PackageCard.jsx';
 
@@ -20,10 +21,23 @@ const Packages = () => {
   const [packages, setPackages] = useState([]);
   const [state, setState] = useState('loading');
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   // Filters
   const [activeGroup, setActiveGroup]   = useState(null); // couple/family/friends
   const [activeTripType, setActiveTripType] = useState(null); // domestic/international
   const [activePriceKey, setActivePriceKey] = useState(null);
+
+  useEffect(() => {
+  if (location.pathname === '/domesticpackages') {
+    setActiveTripType('domestic');
+  } else if (location.pathname === '/internationalpackages') {
+    setActiveTripType('international');
+  } else {
+    setActiveTripType(null);
+  }
+}, [location.pathname]);
 
   useEffect(() => {
     getPackages()
@@ -60,16 +74,33 @@ const Packages = () => {
   }, [packages, activeGroup, activeTripType, activePriceKey]);
 
   const toggleGroup     = key => setActiveGroup(v => v === key ? null : key);
-  const toggleTripType  = key => setActiveTripType(v => v === key ? null : key);
+  const toggleTripType = key => {
+  if (key === 'domestic') {
+    if (location.pathname === '/domesticpackages') {
+      navigate('/packages');
+    } else {
+      navigate('/domesticpackages');
+    }
+  }
+
+  if (key === 'international') {
+    if (location.pathname === '/internationalpackages') {
+      navigate('/packages');
+    } else {
+      navigate('/internationalpackages');
+    }
+  }
+};
   const togglePrice     = key => setActivePriceKey(v => v === key ? null : key);
 
   const hasFilters = activeGroup || activeTripType || activePriceKey;
 
-  const clearAll = () => {
-    setActiveGroup(null);
-    setActiveTripType(null);
-    setActivePriceKey(null);
-  };
+ const clearAll = () => {
+  setActiveGroup(null);
+  setActiveTripType(null);
+  setActivePriceKey(null);
+  navigate('/packages');
+};
 
   const activeFilterLabel = () => {
     const parts = [];
