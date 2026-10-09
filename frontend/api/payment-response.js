@@ -87,152 +87,121 @@ export default async function handler(req, res) {
       );
 
     
-        // =========================================================
-    // WATI - SEND PAYMENT SUCCESS MESSAGE
+  
     // =========================================================
-
+    // WATI - SEND PDF RECEIPT, FALL BACK TO TEXT TEMPLATE
+    // =========================================================
     if (isSuccess) {
       try {
-        // Get customer details from Supabase
-        const { data: payment, error: paymentError } =
-          await supabase
-            .from("payments")
-            .select("customer_name, mobile, paid_at")
-            .eq(
-              "merchant_txn_no",
-              callback.merchantTxnNo
-            )
-            .single();
+        const { data: payment, error: paymentError } = await supabase
+          .from("payments")
+          .select("customer_name, mobile, paid_at")
+          .eq("merchant_txn_no", callback.merchantTxnNo)
+          .single();
 
-        if (paymentError) {
-          console.error(
-            "WATI: Could not fetch customer details:",
-            paymentError
-          );
-        } else if (payment) {
+        if (paymentError || !payment) {
+          console.error("WATI: Could not fetch customer details:", paymentError);
+        } else {
+          let whatsappNumber = String(payment.mobile || "").replace(/\D/g, "");
 
-          // Format mobile number for WhatsApp
-         let whatsappNumber = String(
-  payment.mobile || ""
-).replace(/\D/g, "");
+          if (whatsappNumber.length === 11 && whatsappNumber.startsWith("0")) {
+            whatsappNumber = whatsappNumber.substring(1);
+          }
 
-// Remove leading 0 if customer entered 0XXXXXXXXXX
-if (
-  whatsappNumber.length === 11 &&
-  whatsappNumber.startsWith("0")
-) {
-  whatsappNumber = whatsappNumber.substring(1);
-}
+          if (whatsappNumber.length === 10) {
+            whatsappNumber = "91" + whatsappNumber;
+          }
 
-// If 10-digit Indian number, add country code
-if (whatsappNumber.length === 10) {
-  whatsappNumber = "91" + whatsappNumber;
-}
-
-// If already starts with 91, keep it as it is
-if (
-  whatsappNumber.length === 12 &&
-  whatsappNumber.startsWith("91")
-) {
-  // Already in correct format
-}
-
-console.log(
-  "WATI FINAL WHATSAPP NUMBER:",
-  whatsappNumber
-);
+          console.log("WATI FINAL WHATSAPP NUMBER:", whatsappNumber);
 
           if (!whatsappNumber) {
-            console.error(
-              "WATI: Customer mobile number not found"
-            );
+            console.error("WATI: Customer mobile number not found");
           } else {
+            const sendTemplate = async (templateName, parameters, broadcastName) => {
+              const url =
+                `${process.env.WATI_API_ENDPOINT}/api/v1/sendTemplateMessage` +
+                `?whatsappNumber=${encodeURIComponent(whatsappNumber)}`;
 
-            const watiUrl =
-              `${process.env.WATI_API_ENDPOINT}/api/v1/sendTemplateMessage?whatsappNumber=${encodeURIComponent(
-                whatsappNumber
-              )}`;
-
-            const watiPayload = {
-              template_name:
-                process.env.WATI_TEMPLATE_NAME,
-
-              broadcast_name:
-                "payment_received",
-
-              parameters: [
-                {
-                  name: "1",
-                  value: String(
-                    payment.customer_name || ""
-                  )
-                },
-                {
-                  name: "2",
-                  value: String(
-                    callback.amount || ""
-                  )
-                },
-                {
-                  name: "3",
-                  value: String(
-                    callback.merchantTxnNo || ""
-                  )
-                },
-                 {
-    name: "4",
-    value: payment.paid_at
-      ? new Intl.DateTimeFormat("en-IN", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-          timeZone: "Asia/Kolkata"
-        }).format(new Date(payment.paid_at))
-      : "Date unavailable"
-  }
-                
-              ]
-            };
-
-            const watiResponse =
-              await fetch(watiUrl, {
+              const response = await fetch(url, {
                 method: "POST",
-
                 headers: {
                   "Content-Type": "application/json",
-                  "Authorization":
-                    `Bearer ${process.env.WATI_API_TOKEN}`
+                  "Authorization": `Bearer ${process.env.WATI_API_TOKEN}`
                 },
-
-                body: JSON.stringify(watiPayload)
+                body: JSON.stringify({
+                  template_name: templateName,
+                  broadcast_name: broadcastName,
+                  parameters
+                })
               });
 
-            const watiResult =
-              await watiResponse.text();
+              const result = await response.text();
 
-            console.log(
-              "========== WATI RESPONSE =========="
-            );
+              console.log("WATI TEMPLATE:", templateName);
+              console.log("WATI STATUS:", response.status);
+              console.log("WATI RESULT:", result);
 
-            console.log(
-              "WATI STATUS:",
-              watiResponse.status
-            );
+              return response.ok;
+            };
 
-            console.log(
-              "WATI RESULT:",
-              watiResult
-            );
+            const amount = String(callback.amount || "");
+            const transactionNumber = String(callback.merchantTxnNo || "");
+
+            const receiptUrl =
+              `https://www.sangeethaholidays.com/api/generate-receipt?txn=${encodeURIComponent(transactionNumber)}`;
+
+            const pdfParameters = [
+              { name: "pdf_link", value: receiptUrl },
+              { name: "1", value: String(payment.customer_name || "") },
+              { name: "2", value: amount },
+              { name: "3", value: transactionNumber }
+            ];
+
+            let pdfSent = false;
+
+            try {
+              pdfSent = await sendTemplate(
+                process.env.WATI_RECEIPT_TEMPLATE_NAME,
+                pdfParameters,
+                "payment_receipt_pdf"
+              );
+            } catch (pdfError) {
+              console.error("WATI PDF template request failed:", pdfError);
+            }
+
+            if (!pdfSent) {
+              console.log("WATI: Trying existing text-only template");
+
+              const textParameters = [
+                { name: "1", value: String(payment.customer_name || "") },
+                { name: "2", value: amount },
+                { name: "3", value: transactionNumber },
+                {
+                  name: "4",
+                  value: payment.paid_at
+                    ? new Intl.DateTimeFormat("en-IN", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                        timeZone: "Asia/Kolkata"
+                      }).format(new Date(payment.paid_at))
+                    : "Date unavailable"
+                }
+              ];
+
+              await sendTemplate(
+                process.env.WATI_TEMPLATE_NAME,
+                textParameters,
+                "payment_received"
+              );
+            }
           }
         }
-
       } catch (watiError) {
-        console.error(
-          "WATI WhatsApp error:",
-          watiError
-        );
+        console.error("WATI WhatsApp error:", watiError);
       }
     }
+
 
     return res.redirect(
       302,
