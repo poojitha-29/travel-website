@@ -97,7 +97,7 @@ export default async function handler(req, res) {
         const { data: payment, error: paymentError } =
           await supabase
             .from("payments")
-            .select("customer_name, mobile")
+            .select("customer_name, mobile, paid_at")
             .eq(
               "merchant_txn_no",
               callback.merchantTxnNo
@@ -178,7 +178,19 @@ console.log(
                   value: String(
                     callback.merchantTxnNo || ""
                   )
-                }
+                },
+                 {
+    name: "4",
+    value: payment.paid_at
+      ? new Intl.DateTimeFormat("en-IN", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          timeZone: "Asia/Kolkata"
+        }).format(new Date(payment.paid_at))
+      : "Date unavailable"
+  }
+                
               ]
             };
 
