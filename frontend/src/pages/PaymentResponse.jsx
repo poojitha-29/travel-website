@@ -76,6 +76,23 @@ export default function PaymentResponse() {
                   <strong>{payment.paymentMode}</strong>
                 </p>
               )}
+              {payment.paidAt && (
+  <p>
+    Payment Date:
+    <br />
+    <strong>
+      {new Date(payment.paidAt).toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: "Asia/Kolkata",
+      })} IST
+    </strong>
+  </p>
+)}
             </>
           ) : (
             <p>
