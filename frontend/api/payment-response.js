@@ -154,7 +154,18 @@ export default async function handler(req, res) {
               { name: "pdf_link", value: receiptUrl },
               { name: "1", value: String(payment.customer_name || "") },
               { name: "2", value: amount },
-              { name: "3", value: transactionNumber }
+              { name: "3", value: transactionNumber },
+  {
+    name: "4",
+    value: payment.paid_at
+      ? new Intl.DateTimeFormat("en-IN", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          timeZone: "Asia/Kolkata"
+        }).format(new Date(payment.paid_at))
+      : "Date unavailable"
+  }
             ];
 
             let pdfSent = false;
