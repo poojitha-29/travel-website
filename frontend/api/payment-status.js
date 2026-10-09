@@ -17,9 +17,11 @@ export default async function handler(req, res) {
 
     const { data, error } = await supabase
       .from("payments")
-      .select(
-        "merchant_txn_no, status, payment_mode, payment_id, txn_id, gateway_response"
-      )
+      
+.select(
+  "merchant_txn_no, status, payment_mode, payment_id, txn_id, gateway_response, paid_at"
+)
+
       .eq("merchant_txn_no", txn)
       .single();
 
@@ -39,7 +41,8 @@ export default async function handler(req, res) {
       paymentMode: data.payment_mode,
       paymentId: data.payment_id,
       txnId: data.txn_id,
-      amount: amount
+      amount: amount,
+       paidAt: data.paid_at
     });
 
   } catch (error) {
