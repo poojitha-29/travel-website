@@ -59,12 +59,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const amount = amountValue.toLocaleString("en-IN", {
-      style: "currency",
-      currency: "INR",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
+    const amount = `INR ${amountValue.toFixed(2)}`;
 
     const paymentDate = payment.paid_at
       ? new Intl.DateTimeFormat("en-IN", {
