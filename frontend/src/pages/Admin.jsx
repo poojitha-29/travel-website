@@ -38,7 +38,7 @@ const TABS = [
     </svg>
   )
 },
-  { id: 'videos',   label: 'Videos',   table: 'videos',         desc: 'Video content',
+  { id: 'videos', label: 'Itinerary', table: 'videos', desc: 'Itinerary links',
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
@@ -162,11 +162,11 @@ function AdminFormFields({ activeTab, form, set, activeCats, toggleCat }) {
       {activeTab === 'videos' && (<>
         <div className="adm-field">
           <label>Title <span className="adm-req">*</span></label>
-          <input className="adm-input" value={form.title} onChange={e => set('title', e.target.value)} placeholder="e.g. Bali Travel Guide 2024" required />
+          <input className="adm-input" value={form.title} onChange={e => set('title', e.target.value)} placeholder="Itenary" required />
         </div>
         <div className="adm-field">
           <label>Video URL <span className="adm-req">*</span></label>
-          <input className="adm-input" value={form.video_url} onChange={e => set('video_url', e.target.value)} placeholder="https://youtube.com/…" required />
+          <input className="adm-input" value={form.video_url} onChange={e => set('video_url', e.target.value)} placeholder="https://travel-itenary-kwyd-git-main-shpl1.vercel.app/" required />
         </div>
         <ImageUpload label="Thumbnail" value={form.thumbnail_url} onChange={url => set('thumbnail_url', url)} allowUrl />
         <div className="adm-field">
@@ -552,7 +552,16 @@ const Admin = () => {
     </td>
   </tr>
 )) : rows.map(v => (
-                    <tr key={v.id} className={`adm-tr${selectedId === v.id ? ' adm-tr-sel' : ''}`} onClick={() => onEdit(v)}>
+  <tr
+    key={v.id}
+    className="adm-tr"
+    onClick={() => {
+      if (v.video_url) {
+        window.location.href = v.video_url;
+      }
+    }}
+    style={{ cursor: v.video_url ? "pointer" : "default" }}
+  >
                       <td>{v.thumbnail_url && <img src={v.thumbnail_url} alt="" className="adm-thumb" onError={e => { e.target.style.display='none'; }} />}</td>
                       <td>
                         <div className="adm-td-name">{v.title}</div>
