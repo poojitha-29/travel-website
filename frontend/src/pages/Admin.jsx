@@ -149,16 +149,6 @@ function AdminFormFields({ activeTab, form, set, activeCats, toggleCat }) {
           <input className="adm-input" value={form.category} onChange={e => set('category', e.target.value)} placeholder="e.g. Visa, Booking, General" />
         </div>
       </>)}
-{activeTab === 'payments' && (
-  <>
-    <th>Txn No</th>
-    <th>Customer</th>
-    <th>Amount</th>
-    <th>Status</th>
-    <th>Mode</th>
-    <th>Date</th>
-  </>
-)}
       {activeTab === 'videos' && (<>
         <div className="adm-field">
           <label>Title <span className="adm-req">*</span></label>
@@ -445,7 +435,24 @@ const Admin = () => {
     <th>Date</th>
   </>
 )}
-                
+                  </tr>
+                </thead>
+                <tbody>
+                  {loading ? <Skeletons /> : !rows.length ? (
+                    <tr>
+                      <td colSpan={6}>
+                        <div className="adm-empty">
+                          <div className="adm-empty-ring">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                              <circle cx="12" cy="12" r="10" />
+                              <path d="M8 12h8" />
+                            </svg>
+                          </div>
+                          <p className="adm-empty-title">No {tab?.label.toLowerCase()} yet</p>
+                          <p className="adm-empty-sub">Click <strong>New {tab?.label.replace(/s$/, '')}</strong> to add your first entry</p>
+                        </div>
+                      </td>
+                    </tr>
                   ) : activeTab === 'packages' ? rows.map(p => (
                     <tr key={p.id} className={`adm-tr${selectedId === p.id ? ' adm-tr-sel' : ''}`} onClick={() => onEdit(p)}>
                       <td>
@@ -583,6 +590,7 @@ const Admin = () => {
               </table>
             </div>
           </div>
+          )}
 
           {/* Side panel */}
           {sideOpen && (
