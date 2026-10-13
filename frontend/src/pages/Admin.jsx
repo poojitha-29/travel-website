@@ -429,22 +429,24 @@ const Admin = () => {
     <th>Date</th>
   </>
 )}
-                    {activeTab === 'videos'   && (<><th>Thumb</th><th>Title</th><th colSpan={2}>URL</th><th>Actions</th></>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {loading ? <Skeletons /> : !rows.length ? (
-                    <tr><td colSpan={5}>
-                      <div className="adm-empty">
-                        <div className="adm-empty-ring">
-                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><line x1="9" y1="15" x2="15" y2="15" />
-                          </svg>
-                        </div>
-                        <p className="adm-empty-title">No {tab?.label.toLowerCase()} yet</p>
-                        <p className="adm-empty-sub">Click <strong>New {tab?.label.replace(/s$/, '')}</strong> to add your first entry</p>
-                      </div>
-                    </td></tr>
+                    {activeTab === 'videos'   && (
+  <tr>
+    <td colSpan={5} style={{ padding: '24px', textAlign: 'center' }}>
+      <a
+        href="https://travel-itenary-kwyd-git-main-shpl1.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          color: '#176747',
+          fontWeight: 600,
+          textDecoration: 'underline',
+        }}
+      >
+        Open Itinerary
+      </a>
+    </td>
+  </tr>
+
                   ) : activeTab === 'packages' ? rows.map(p => (
                     <tr key={p.id} className={`adm-tr${selectedId === p.id ? ' adm-tr-sel' : ''}`} onClick={() => onEdit(p)}>
                       <td>
