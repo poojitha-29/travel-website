@@ -403,7 +403,7 @@ const Admin = () => {
   {activeTab === 'videos' ? (
     <div className="adm-table-panel" style={{ padding: '24px' }}>
       <a
-        href="https://travel-itenary-kwyd-git-main-shpl1.vercel.app/"
+        href="https://travel-itenary-kwyd.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
         style={{
