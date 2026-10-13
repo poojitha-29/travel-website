@@ -409,8 +409,24 @@ const Admin = () => {
 
         {/* Main grid */}
         <div className="adm-grid">
-
-          {/* Table panel */}
+ {/* Table panel */}
+  {activeTab === 'videos' ? (
+    <div className="adm-table-panel" style={{ padding: '24px' }}>
+      <a
+        href="https://travel-itenary-kwyd-git-main-shpl1.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          color: '#176747',
+          fontWeight: 600,
+          textDecoration: 'underline',
+        }}
+      >
+        Open Itinerary
+      </a>
+    </div>
+  ) : (
+        
           <div className="adm-table-panel">
             <div className="adm-table-scroll">
               <table className="adm-table">
@@ -429,24 +445,7 @@ const Admin = () => {
     <th>Date</th>
   </>
 )}
-                    {activeTab === 'videos'   && (
-  <tr>
-    <td colSpan={5} style={{ padding: '24px', textAlign: 'center' }}>
-      <a
-        href="https://travel-itenary-kwyd-git-main-shpl1.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          color: '#176747',
-          fontWeight: 600,
-          textDecoration: 'underline',
-        }}
-      >
-        Open Itinerary
-      </a>
-    </td>
-  </tr>
-
+                
                   ) : activeTab === 'packages' ? rows.map(p => (
                     <tr key={p.id} className={`adm-tr${selectedId === p.id ? ' adm-tr-sel' : ''}`} onClick={() => onEdit(p)}>
                       <td>
