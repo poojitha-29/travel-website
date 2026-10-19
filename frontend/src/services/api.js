@@ -80,7 +80,7 @@ export async function getReviews(packageId) {
   // Only fetch fields that are safe to display publicly.
   let query = client
     .from('reviews')
-    .select('id, name, rating, comment, created_at, package_id')
+    .select('id, name, rating, comment, created_at')
     .order('created_at', { ascending: false });
 
   if (packageId != null) {
