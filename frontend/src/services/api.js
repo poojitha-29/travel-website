@@ -73,15 +73,20 @@ export async function getGallery() {
   return wrap(data ?? []);
 }
 
+
 export async function getReviews(packageId) {
   const client = ensureClient();
+
+  // Only fetch fields that are safe to display publicly.
   let query = client
     .from('reviews')
-    .select('*')
+    .select('id, name, rating, comment, created_at, package_id')
     .order('created_at', { ascending: false });
+
   if (packageId != null) {
     query = query.eq('package_id', packageId);
   }
+
   const { data, error } = await query;
   if (error) throw error;
   return wrap(data ?? []);
@@ -89,14 +94,22 @@ export async function getReviews(packageId) {
 
 export async function createReview(reviewData) {
   const client = ensureClient();
-  const { data, error } = await client
+
+  const { error } = await client
     .from('reviews')
-    .insert({ name: reviewData.name, rating: reviewData.rating, comment: reviewData.comment })
-    .select('*')
-    .single();
+    .insert({
+      name: reviewData.name.trim(),
+      phone: reviewData.phone,
+      email: reviewData.email?.trim() || null,
+      rating: Number(reviewData.rating),
+      comment: reviewData.comment.trim(),
+    });
+
   if (error) throw error;
-  return wrap(data);
+
+  return wrap({ message: 'Review submitted successfully' });
 }
+
 
 export async function getFaqs() {
   const client = ensureClient();
