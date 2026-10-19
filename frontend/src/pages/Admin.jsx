@@ -67,6 +67,7 @@ const EMPTY = {
   faqs:     { question:'', answer:'', category:'' },
   payments: {},
   videos:   { title:'', video_url:'', thumbnail_url:'', duration_seconds:'' },
+   reviews: {},
 };
 
 const CATEGORIES = ['couple','family','friends','domestic','international'];
@@ -378,12 +379,17 @@ const Admin = () => {
             <h1 className="adm-topbar-title">{tab?.label}</h1>
             <span className="adm-topbar-count">{rows.length} {rows.length === 1 ? 'record' : 'records'}</span>
           </div>
-          <button className="adm-btn-primary" onClick={openNew}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-            New {tab?.label.replace(/s$/, '')}
-          </button>
+        {activeTab !== 'reviews' && (
+  <button className="adm-btn-primary" onClick={openNew}>
+    <svg width="14" height="14" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" strokeWidth="2.5"
+      strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19" />
+      <line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
+    New {tab?.label.replace(/s$/, '')}
+  </button>
+)}
         </header>
 
         {/* Alerts */}
@@ -656,7 +662,7 @@ const Admin = () => {
           )}
 
           {/* Side panel */}
-          {sideOpen && (
+          {sideOpen && activeTab !== 'reviews' && (
             <aside className="adm-panel" id="adm-panel">
               <div className="adm-panel-head">
                 <div className="adm-panel-head-left">
