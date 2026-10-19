@@ -201,7 +201,7 @@ const Admin = () => {
     if (!isLoggedIn || !tab) return;
     let cancelled = false;
     const load = async () => {
-      setLoading(true); setError(''); setSelectedId(null); setForm(EMPTY[activeTab]);
+      setLoading(true); setError(''); setSelectedId(null); setForm(EMPTY[activeTab]); setRows([]); // Clear the previous tab's rows
       try {
         const data = await adminList(tab.table);
         if (!cancelled) setRows(data || []);
