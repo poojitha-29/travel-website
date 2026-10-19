@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AdminLogin from '../AdminLogin';
-import { adminList, adminInsert, adminUpdate, adminDelete } from '../services/supabaseAdmin.js';
+import {  supabaseAdmin, adminList, adminInsert, adminUpdate, adminDelete } from '../services/supabaseAdmin.js';
 import ImageUpload from '../components/ImageUpload';
 
 const TABS = [
