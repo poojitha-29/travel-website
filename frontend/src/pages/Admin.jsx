@@ -203,7 +203,18 @@ const Admin = () => {
     const load = async () => {
       setLoading(true); setError(''); setSelectedId(null); setForm(EMPTY[activeTab]); setRows([]); // Clear the previous tab's rows
       try {
-        const data = await adminList(tab.table);
+        const data =
+  activeTab === 'reviews'
+    ? await (async () => {
+        const { data, error } = await supabaseAdmin
+          .from('reviews')
+          .select('id, name, rating, comment, created_at')
+          .order('id');
+
+        if (error) throw error;
+        return data;
+      })()
+    : await adminList(tab.table);
         if (!cancelled) setRows(data || []);
       } catch (e) {
         if (!cancelled) setError(e.message || 'Failed to load data');
