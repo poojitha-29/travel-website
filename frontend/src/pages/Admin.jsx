@@ -45,6 +45,20 @@ const TABS = [
       </svg>
     )
   },
+
+    {
+    id: 'reviews',
+    label: 'Reviews',
+    table: 'reviews',
+    desc: 'Traveller reviews',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round">
+        <path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3z" />
+      </svg>
+    ),
+  },
 ];
 
 const EMPTY = {
@@ -435,6 +449,15 @@ const Admin = () => {
     <th>Date</th>
   </>
 )}
+                    {activeTab === 'reviews' && (
+  <>
+    <th>Traveller</th>
+    <th>Rating</th>
+    <th>Review</th>
+    <th>Date</th>
+    <th>Actions</th>
+  </>
+)}
                   </tr>
                 </thead>
                 <tbody>
@@ -515,6 +538,46 @@ const Admin = () => {
                         </button>
                       </td>
                     </tr>
+            )) : activeTab === 'reviews' ? rows.map(r => (
+  <tr key={r.id} className="adm-tr">
+    <td>
+      <div className="adm-td-name">{r.name}</div>
+    </td>
+    <td>
+      <span style={{ color: '#c99b35', letterSpacing: '2px' }}>
+        {'★'.repeat(Number(r.rating) || 0)}
+        {'☆'.repeat(5 - (Number(r.rating) || 0))}
+      </span>
+    </td>
+    <td>
+      <div className="adm-td-preview" style={{ whiteSpace: 'normal' }}>
+        {r.comment}
+      </div>
+    </td>
+    <td>
+      <div className="adm-td-sub">
+        {r.created_at
+          ? new Date(r.created_at).toLocaleDateString()
+          : '—'}
+      </div>
+    </td>
+    <td className="adm-td-actions" onClick={e => e.stopPropagation()}>
+      <button
+        className="adm-action-del"
+        onClick={() => handleDelete(r.id)}
+        disabled={loading}
+        title="Delete review"
+      >
+        <svg width="13" height="13" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" strokeWidth="2"
+          strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="3 6 5 6 21 6" />
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+        </svg>
+      </button>
+    </td>
+  </tr>
+
                   ))  : activeTab === 'payments' ? rows.map(p => (
   <tr key={p.id}>
     <td>
